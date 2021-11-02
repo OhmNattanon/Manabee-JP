@@ -29,5 +29,8 @@ module.exports = (sequelize, DataTypes) => {
       underScored: true,
     }
   );
+  User.associate = (models) => {
+    User.hasOne(models.Progress);
+  };
   return User;
 };

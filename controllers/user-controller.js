@@ -24,6 +24,20 @@ const getById_user = async (req, res) => {
   }
 };
 
+//get user by username
+const getByUsername_user = async (req, res) => {
+  try {
+    const thisUser = await User.findOne({
+      where: {
+        username: req.body.username,
+      },
+    });
+    res.send(thisUser);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 //register user
 const regis_newUser = async (req, res) => {
   try {
@@ -47,11 +61,11 @@ const regis_newUser = async (req, res) => {
 const user_login = async (req, res) => {
   try {
     const token = jwt.sign(
-      { username: req.body.username, email: req.body.email },
+      { username: req.body.username, email: req.body.email, id: req.body.id },
       process.env.ACCESS_SECRET_TOKEN,
       { expiresIn: "2h" }
     );
-    console.log(token);
+
     res.status(200).json({ token });
   } catch (err) {
     res.status(500).send("Login Failed!");
@@ -79,4 +93,5 @@ module.exports = {
   getAll_user,
   getById_user,
   user_delete,
+  getByUsername_user,
 };

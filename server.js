@@ -7,6 +7,7 @@ const cors = require("cors");
 const DB = require("./models");
 const user_route = require("./route/user_route");
 const course_route = require("./route/course_route");
+const progress_route = require("./route/progress_route");
 // const flash = require("express-flash");
 // const session = require("express-session");
 
@@ -22,6 +23,7 @@ app.use(cors());
 
 app.use("/user", user_route);
 app.use("/course", course_route);
+app.use("/progress", progress_route);
 
 // DB.sequelize.sync();
 

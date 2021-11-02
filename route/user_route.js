@@ -21,6 +21,8 @@ router.post(
 );
 router.post("/login", auth.loginVar, userController.user_login);
 
+router.post("/by-username", userController.getByUsername_user);
+
 router.get("/all", userController.getAll_user);
 router.get("/:id", userController.getById_user);
 router.delete("/del/:id", userController.user_delete);
