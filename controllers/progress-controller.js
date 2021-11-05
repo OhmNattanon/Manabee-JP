@@ -26,17 +26,36 @@ const getByUserId_progress = async (req, res) => {
 //update progress
 const updateCourse_progress = async (req, res) => {
   try {
-    thisUserProgress.update(
+    const updateProgress = await Progress.update(
       {
         courseId: req.body.completed,
       },
       {
         where: {
-          id: req.body.id,
+          UserId: req.body.id,
         },
       }
     );
-    res.send(thisUserProgress);
+    res.send(updateProgress);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+//update game score
+const updateScore_progress = async (req, res) => {
+  try {
+    const updateScore = await Progress.update(
+      {
+        score: req.body.score,
+      },
+      {
+        where: {
+          userId: req.body.id,
+        },
+      }
+    );
+    res.send(updateScore);
   } catch (error) {
     console.log(error);
   }
@@ -46,4 +65,5 @@ module.exports = {
   getAll_progress,
   getByUserId_progress,
   updateCourse_progress,
+  updateScore_progress,
 };
