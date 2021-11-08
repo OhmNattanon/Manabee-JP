@@ -32,7 +32,7 @@ const updateCourse_progress = async (req, res) => {
       },
       {
         where: {
-          UserId: req.body.id,
+          userId: req.body.id,
         },
       }
     );
@@ -61,9 +61,29 @@ const updateScore_progress = async (req, res) => {
   }
 };
 
+//reset game score
+const resetScore_progress = async (req, res) => {
+  try {
+    const reset = await Progress.update(
+      {
+        score: 0,
+      },
+      {
+        where: {
+          userId: req.body.id,
+        },
+      }
+    );
+    res.send(reset);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 module.exports = {
   getAll_progress,
   getByUserId_progress,
   updateCourse_progress,
   updateScore_progress,
+  resetScore_progress,
 };
