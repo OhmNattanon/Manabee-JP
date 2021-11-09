@@ -50,8 +50,10 @@ const regis_newUser = async (req, res) => {
       password: hashedPW,
       username: req.body.username,
     };
-    User.create(newUser);
-    res.send("Done");
+    // User.create(newUser);
+    const thisUser = await User.create(newUser);
+
+    res.send({ id: thisUser.id });
   } catch {
     res.send("Register failed!");
   }

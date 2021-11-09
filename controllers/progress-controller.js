@@ -1,5 +1,5 @@
 require("dotenv").config();
-const { Progress } = require("../models");
+const { Progress, User } = require("../models");
 
 const getAll_progress = async (req, res) => {
   try {
@@ -18,6 +18,20 @@ const getByUserId_progress = async (req, res) => {
       },
     });
     res.send(byIdProgress);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+//post initial progress
+const postInitialProgress = async (req, res) => {
+  try {
+    const initProgress = await Progress.create({
+      courseId: 1,
+      score: 0,
+      UserId: req.body.userId,
+    });
+    res.send(initProgress);
   } catch (error) {
     console.log(error);
   }
@@ -86,4 +100,5 @@ module.exports = {
   updateCourse_progress,
   updateScore_progress,
   resetScore_progress,
+  postInitialProgress,
 };

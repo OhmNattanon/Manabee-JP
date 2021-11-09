@@ -25,7 +25,7 @@ app.use("/user", user_route);
 app.use("/course", course_route);
 app.use("/progress", progress_route);
 
-// DB.sequelize.sync();
+// DB.sequelize.sync({ force: false, alter: true });
 
 const PORT = process.env.PORT;
 
